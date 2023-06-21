@@ -264,14 +264,23 @@
 		"boolean_value": false,
 		"integer_value": false,
 		"value": [
+<<<<<<< HEAD
 			50
+=======
+			55
+>>>>>>> upstream/main
 		],
 		"range": {
 			"min": "_tbrk4",
 			"max": "_tbrk6"
 		},
+<<<<<<< HEAD
 		"out_of_range_minmsg": "",
 		"out_of_range_maxmsg": "",
+=======
+		"out_of_range_minmsg": "for_tbrk4",
+		"out_of_range_maxmsg": "for_tbrk6",
+>>>>>>> upstream/main
 		"out_of_range_action": "stop"
 	},
 	"_rate6": {
@@ -303,8 +312,13 @@
 
 	},
 	"_tbrk6": {
+<<<<<<< HEAD
 		"long_name": "Sixth bracket",
 		"description": "Income below this threshold and above tax bracket 5 is taxed at tax rate6",
+=======
+		"long_name": "Fifth bracket",
+		"description": "Income below this threshold and above tax bracket 1 is taxed at tax rate5",
+>>>>>>> upstream/main
 		"itr_ref": " ",
 		"notes": "",
 		"row_var": "AYEAR",

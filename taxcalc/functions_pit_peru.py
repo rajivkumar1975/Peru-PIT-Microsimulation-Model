@@ -280,8 +280,13 @@ def deduction_donations(net_inc_cat4, net_inc_cat5, net_inc_foreign, ded_charita
 
 "Calculation of net income from labor and foreign sources"
 @iterate_jit(nopython=True)
+<<<<<<< HEAD
 def income_labor_all(net_inc_cat4, net_inc_cat5, net_inc_nondiv_cat2, switch_flat_sch, net_inc_foreign, ded_std, ded_addl, ded_fintax, ded_donation, tti_w):
     tti_w = net_inc_nondiv_cat2*switch_flat_sch + (net_inc_cat4 + net_inc_cat5)
+=======
+def income_labor_all(net_inc_cat4, net_inc_cat5, tti_c, switch_flat_sch, net_inc_foreign, ded_std, ded_addl, ded_fintax, ded_donation, tti_w):
+    tti_w = (net_inc_cat4 + net_inc_cat5) + tti_c*switch_flat_sch
+>>>>>>> upstream/main
     tti_w = tti_w - ded_std - ded_addl - ded_fintax - ded_donation + net_inc_foreign
     return tti_w
 
@@ -368,7 +373,7 @@ def cal_tti_labor(rate1, rate2, rate3, rate4, rate5, tbrk1, tbrk2, tbrk3, tbrk4,
     
 "Calculation for PIT from labor income incorporating behaviour"
 @iterate_jit(nopython=True)
-def cal_pit_w(tti_w_behavior, peru_tax_unit, rate1, rate2, rate3, rate4, rate5, tbrk1, tbrk2, tbrk3, tbrk4, tbrk5, pit_w):
+def cal_pit_w(tti_w_behavior, peru_tax_unit, rate1, rate2, rate3, rate4, rate5, rate6, tbrk1, tbrk2, tbrk3, tbrk4, tbrk5, tbrk6, pit_w):
     """
     Compute tax liability given the progressive tax rate schedule specified
     by the (marginal tax) rate* and (upper tax bracket) brk* parameters and
@@ -380,7 +385,8 @@ def cal_pit_w(tti_w_behavior, peru_tax_unit, rate1, rate2, rate3, rate4, rate5, 
                     rate2 * min(tbrk2 - tbrk1, max(0., taxinc - tbrk1)) +
                     rate3 * min(tbrk3 - tbrk2, max(0., taxinc - tbrk2)) +
                     rate4 * min(tbrk4 - tbrk3, max(0., taxinc - tbrk3)) +
-                    rate5 * max(0., taxinc - tbrk4))
+                    rate5 * min(tbrk5 - tbrk4, max(0., taxinc - tbrk4)) +
+                    rate6 * max(0., taxinc - tbrk5))
     pit_w *= peru_tax_unit    
     return pit_w
 
@@ -441,7 +447,11 @@ def cal_tti_capital(rate_tax_cat1, rate_tax_cat1_curr_law,
 "Calculation for PIT from capital"
 @iterate_jit(nopython=True)
 def cal_pit_c(rate_tax_cat1, rate_tax_cat2, rate_tax_div, tti_cat1_behavior, tti_cat2_behavior, tti_div_behavior, switch_flat_sch, pit_c):
+<<<<<<< HEAD
     pit_c = ((tti_cat1_behavior*rate_tax_cat1) + (tti_cat2_behavior*rate_tax_cat2))*(1 - switch_flat_sch) + (tti_div_behavior*rate_tax_div)
+=======
+    pit_c = ((tti_cat1_behavior*rate_tax_cat1) + (tti_cat2_behavior*rate_tax_cat2) + (tti_div_behavior*rate_tax_div))*(1 - switch_flat_sch)
+>>>>>>> upstream/main
     return pit_c
 
 
