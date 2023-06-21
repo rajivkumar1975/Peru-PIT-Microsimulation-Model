@@ -364,8 +364,8 @@ class Records(object):
         #print(self.mortgage_credits1.sum())
         # check that MUST_READ_VARS are all present in taxdf
         if not Records.MUST_READ_VARS.issubset(READ_VARS):
-            #print('MUST_READ_VARS ', Records.MUST_READ_VARS)
-            #print('READ_VARS ',READ_VARS)
+            print('MUST_READ_VARS ', Records.MUST_READ_VARS)
+            print('READ_VARS ',READ_VARS)
             msg = 'Records data missing one or more MUST_READ_VARS'
             raise ValueError(msg)
         # delete intermediate taxdf object
